@@ -1,0 +1,91 @@
+<div class="mx-auto mt-4" style="width: 75%;">
+  <button class="btn btn-primary btn-sm m-2" onclick="localReload()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+      <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+    </svg>
+  </button>
+  
+  <table class="table bg-dark text-white" style="border-radius: 1em 1em 0 0">
+    <thead>
+      <tr>
+        <th scope="col" style="width: 5em;"></th>
+        <th scope="col" style="width: 9em">Ticket Number</th>
+        <th scope="col" style="width: 20em;">Title</th>
+        <th scope="col" style="width: 10em">Account</th>
+        <th scope="col" style="width: 11em;">Status</th>
+        <th scope="col" style="width: 11em;">Resource</th>
+        <th scope="col" style="width: 11em;">Priority</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each tickets}}
+      <tr>
+          <th style="width: 10px;" scope="row">
+            <a onclick="editTicket({{this.ticket_id}})" style="width: 1px;"><i class="fas fa-edit fa-lg"></i></a>
+            {{#if ../isAdmin}}
+            <a onclick="deleteTicket({{this.ticket_id}})" style="width: 1px;"><i class="fas fa-trash-alt"></i></a>
+            {{/if}}
+          </th>
+        <td><a onclick="openTicketPopup('/viewTicket{{this.ticket_id}}', 1228, 755)" style="color: lightblue;">{{this.ticket_num}}</a></td>
+        <td data-toggle="tooltip" title="{{this.description}}">{{this.title}}</td>
+        <td>{{this.account}}</td>
+{{!-- STATUS --}}
+        <script>
+          if ('{{this.STATUS}}' === 'Needs Attention') {
+            document.write(`<td style='color:red;'>{{this.STATUS}}</td>`)
+          } if ('{{this.STATUS}}' === 'Waiting on Client') {
+            document.write(`<td style='color:gray;'>{{this.STATUS}}</td>`)
+          } if ('{{this.STATUS}}' === 'Client Waiting') {
+            document.write(`<td style='color:gray;'>{{this.STATUS}}</td>`)
+          } if ('{{this.STATUS}}' === 'In Progress') {
+            document.write(`<td style='color:#2cadd8;'>{{this.STATUS}}</td>`)
+          } if ('{{this.STATUS}}' === 'Assigned') {
+            document.write(`<td style='color:#d17f15;'>{{this.STATUS}}</td>`)
+          } if ('{{this.STATUS}}' === 'New') {
+            document.write(`<td style='color:orange;'>{{this.STATUS}}</td>`)
+          } if ('{{this.STATUS}}' === 'Closed') {
+            document.write(`<td style='color:gray;'>{{this.STATUS}}</td>`)
+          } if ('{{this.STATUS}}' === 'On Hold') {
+            document.write(`<td style='color:gray;'>{{this.STATUS}}</td>`)
+          } if ('{{this.STATUS}}' === 'Follow up for Completion') {
+            document.write(`<td style='color:green;'>{{this.STATUS}}</td>`)
+          }
+        </script>
+        <td>{{this.primaryResource}}</td>
+{{!-- END STATUS --}}
+{{!-- PRIORITY --}}
+        <script>
+          if ('{{this.priority}}' === 'CRITICAL') {
+            document.write(`<td style='color:red;'>{{this.priority}}</td>`)
+          } if ('{{this.priority}}' === 'HIGH') {
+            document.write(`<td style='color:orange;'>{{this.priority}}</td>`)
+          } if ('{{this.priority}}' === 'MEDIUM') {
+            document.write(`<td style='color:#2e54d1;'>{{this.priority}}</td>`)
+          } if ('{{this.priority}}' === 'LOW') {
+            document.write(`<td style='color:green;'>{{this.priority}}</td>`)
+          }
+        </script>
+{{!-- END PRIORITY --}}
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+<style>
+a:hover {
+      cursor: pointer;
+  }
+</style>
+
+<script>
+  function deleteTicket(ticket_id) {
+    fetch(`/deleteTicket${ticket_id}`).then((result) => {
+      location.reload();
+    }).catch((err) => {
+      location.reload();
+    })
+}
+</script>
+
+

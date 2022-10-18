@@ -1,0 +1,330 @@
+<form action="/createTicket" method="post">
+<div id="ticket-window">
+{{!-- Begin Left Panel --}}
+  <div id="left-info">
+    <div class="panelContent">
+      <div class="left-section">
+        <label class="dataTitle" for="account">Account</label>
+        <br>
+        <select class="dropdown data-value" name="account">
+            <option value="1" hidden selected>Select...</option>
+            {{#each dbo_clients}}
+                <option value="{{this.account_id}}">{{this.name}}</option>
+            {{/each}}            
+        </select>
+        <p class="data-value"></p>
+        <p class="dataTitle">Contact</p>
+        <p class="data-value"></p>
+        <label class="dataTitle" for="STATUS">Status</label>
+        <select class="dropdown data-value" name="STATUS" id="STATUS">
+            <option value="1" hidden>Select...</option>
+        {{#each dbo_status_helper}}
+            <option value="{{this.statusID}}">{{this.statusTitle}}</option>
+        {{/each}}
+        </select>
+        <label for="priority" class="dataTitle">Priority</label>
+        <select name="priority" class="dropdown data-value">
+            <option style='color:blue;' value="MEDIUM" selected>MEDIUM</option>
+            <option style='color:green;' value="LOW">LOW</option>
+            <option style='color:orange;' value="HIGH">HIGH</option>
+            <option style='color:red;' value="CRITICAL">CRITICAL</option>
+        </select>
+      </div>
+      <div class="left-section">
+        <label for="issue_type" class="dataTitle">Issue Type</label>
+        <select id="issue_type" name="issue_type" class="dropdown data-value" required>
+            <option value="1" hidden>Select...</option>
+            {{#each dbo_issue_type}}
+                <option value="{{this.row_id}}">{{this.issue_name}}</option>
+            {{/each}}
+        </select>
+        <p class="dataTitle">Sub-Issue Type</p>
+        <select name="sub_issue_type" id="sub_issue_select" class="dropdown data-value">
+          <option value="6" hidden>Select...</option>
+        </select>
+        <p class="dataTitle">Source</p>
+        <input type="text" name="source" id="" value="User Created" hidden>
+        <p class="data-value">User Created</p>
+        <p class="dataTitle">Due Date</p>
+        <p class="data-value">09/06/2022 09:08 AM</p>
+        <p class="dataTitle">Estimated Hours</p>
+        <p class="data-value">1h</p>
+        <p class="dataTitle">SLA</p>
+        <p class="data-value">AtNetEdge Contract SLA</p>
+      </div>
+      <div class="left-section">
+        <p class="dataTitle">Queue</p>
+        <p class="data-value">Technical Support</p>
+        <label for="primaryResource" class="dataTitle">Primary Resource</label>
+        <select name="primaryResource" id="p_resource" class="dropdown data-value">
+          <option value="1" hidden>Select...</option>
+          {{#each dbo_user_accounts}}
+            <option value="{{this.resource_id}}">{{this.firstName}} {{this.lastName}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="left-section">
+        <p class="dataTitle">Contract</p>
+        <p class="data-value">Phalanx Logistics Solutions AtNetEdge MSC</p>
+      </div>
+    </div>
+  </div>
+{{!-- End Left Panel --}}
+{{!-- Begin Middle Panel --}}
+  <div id="middle-info">
+    <div class="panelContent">
+      <div class="middle-section">
+        <button class="btn btn-primary" id="createTicketBtn" type="submit">Submit</button>
+        <br>
+        <label class="dataTitle" for="ticket_title">Title</label>
+        <br>
+        <input class="data-value" type="text" name="ticket_title" id="ticket_title">
+        <h6 id="ticket-description-title">DESCRIPTION</h6>
+        <div id="ticket_Description_div"></div>
+        <input type="text" name="ticket_description_input" id="ticket_description_input" hidden>
+      </div>
+    </div>
+  </div>
+{{!-- End Middle Panel --}}
+{{!-- Begin Right Panel --}}
+<div id="right-info">
+  <div class="right-section">
+    <h6>TIME SUMMARY</h6>
+  </div>
+  <div class="right-section">
+    <h6>ACCOUNT/CONTACT</h6>
+    <p class="dataTitle">Phalanx Logistics Solutions</p>
+    <br>
+    <p class="dataTitle">Manager</p>
+    <p class="data-value">Kelly Adams</p>
+    <br>
+    <p class="data-value">18636 Detroit Ave</p>
+    <p class="data-value">Lakewood, OH 44107</p>
+    <p class="data-value">United States</p>
+    <br>
+    <p class="data-value">216-521-5642</p>
+    <hr>
+    <p class="dataTitle">Mike Dagisis</p>
+    <p class="data-value">President</p>
+    <br>
+    <p class="data-value">12166501164</p>
+    <p class="data-value">216-650-1164 (moblie)</p>
+    <p class="data-value">mmd@phalanxlogistics.com</p>
+    <br>
+    <p class="dataTitle">All Open Tickets</p>
+  </div>
+
+</div>
+{{!-- End Right Panel --}}
+</div>
+</form>
+<style>
+
+:root {
+  --minWidth: 20%;
+  --bold: 700;
+  --primary: #303E73;
+  --accent: #07123A;
+  --secondary: #7A85AD;
+}
+html {
+  height: 100%;
+  background-color: var(--accent);
+}
+.ql-editor {
+  background-color: var(--secondary);
+  height: 300px;
+  color: black;
+}
+.ql-toolbar {
+  background-color: rgb(194, 193, 193);
+}
+.action-bar {
+  width: 100%;
+  height: 3.5em;
+  display: flex;
+  gap: 2em;
+  flex-direction: row;
+  align-items: center;
+}
+.action-btn {
+  background-color: hsl(219, 54%, 11%);
+  color: hsl(189, 100%, 50%);
+  border-radius: .5rem;
+  font-weight: 500;
+  padding: .3em;
+}
+.action-btn:hover {
+  background-color: hsl(220, 41%, 19%);
+}
+.mini-nav {
+  margin-top: 1em;
+}
+#ticket-description-title {
+  margin: 0 0 2em .5em;
+}
+.mini-nav {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  background-color: hsl(234, 88%, 13%);
+}
+.mini-nav-list {
+  display: flex; 
+  padding-left: 0;
+  flex-direction: row;
+  justify-content: space-around;
+  list-style: none;
+  font-weight: var(--bold);
+}
+.mini-nav-item:hover {
+  cursor: pointer;
+}
+#ticket-window {
+  min-width: 1130px;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+}
+#ticket-window,p {
+  margin-bottom: 0;
+}
+#left-info {
+  min-width: 250px;
+  max-width: 250px;
+  display: block;
+  height: fit-content;
+  background-color: hsl(278, 71%, 11%);
+}
+#middle-info {
+  width: 100%;
+}
+#right-info {
+  width: var(--minWidth); 
+  min-width: fit-content;
+  max-width: fit-content;
+  display: block;
+  height: fit-content;
+  background-color: hsl(278, 71%, 11%);
+}
+.dataTitle {
+  font-weight: var(--bold);
+}
+.data-value {
+ margin-left: 1em;
+ width: calc(100% - 3em);
+}
+.left-section {
+  padding-left: 1em;
+  min-width: fit-content;
+  border-top: 3px solid rgb(32, 32, 54);
+  background-color: hsl(231, 59%, 11%);
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin-bottom: 2em;
+}
+.right-section {
+  min-width: fit-content;
+  padding-left: 1em;
+  border-top: 3px solid rgb(32, 32, 54);
+  background-color: hsl(231, 59%, 11%);
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin-bottom: 2em;
+  padding-right: 1em;
+}
+.middle-section-title {
+  padding-bottom: 1em;
+  border-bottom: 2px solid lightblue;
+  margin-bottom: 1em;
+}
+.middle-section {
+  max-height: fit-content;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+.comment-section {
+  border: 1px solid rgb(41, 61, 70);
+  border-radius: 1em;
+  padding: 1em;
+  max-height: fit-content;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+#description-window {
+  padding: .5em 1em 1em 1em;
+}
+.comment-options {
+  margin-top: .5em;
+  width: max-content;
+}
+.comment-options-list {
+  padding-left: 0;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  gap: 1em;
+  color: hsl(189, 100%, 50%);
+}
+.comment-options-list-link:hover {
+  cursor: pointer;
+}
+.dropdown {
+  background-color: hsl(0, 1%, 38%);
+}
+#createTicketBtn {
+  margin-bottom: 1em;
+}
+</style>
+<script>    
+
+
+var toolbarOptions = [
+  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+  ['blockquote', 'code-block'],
+
+  [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+  [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+  [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+  [{ 'direction': 'rtl' }],                         // text direction
+
+  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+  [{ 'font': [] }],
+  [{ 'align': [] }],
+
+  ['clean']                                         // remove formatting button
+];
+
+var quill = new Quill('#ticket_Description_div', {
+  modules: {
+    toolbar: toolbarOptions
+  },
+  theme: 'snow'
+});
+
+
+
+let btn = document.getElementById('createTicketBtn')
+btn.addEventListener("click", () => {
+    let text = document.getElementsByClassName('ql-editor')[0].innerHTML
+    document.getElementById('ticket_description_input').value = text
+})    
+ const selectElement = document.querySelector('#issue_type');
+ selectElement.addEventListener('change', (event) => {
+  const result = document.querySelector('.result');
+  let issueSelected = event.target.value
+  fetch(`/fetch/sub_issue_type${issueSelected}`).then((response) => response.json()).then((data) => {
+    var select = document.getElementById("sub_issue_select");
+    select.options.length = 0;
+    var select = document.getElementById("sub_issue_select");
+    for(index in data) {
+        select.options[select.options.length] = new Option(data[index].sub_issue_name, data[index].row_id);
+    }
+}).catch((err) => {
+  console.log(err)
+})
+});
+</script>

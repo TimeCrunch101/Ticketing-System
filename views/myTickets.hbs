@@ -1,0 +1,30 @@
+{{>nav}}
+<h1>Workspace</h1>
+<ul>
+    {{#if technical_support}}
+    <a href="#"><li>Technical Support ({{technical_support}})</li></a>
+    {{/if}}
+    <a href="#"><li>Sales (0)</li></a>
+    <a href="#"><li>NOC (0)</li></a>
+    <a href="#"><li>SOC (0)</li></a>
+    <a href="#"><li>Scheduled (0)</li></a>
+</ul>
+<table>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Priority</th>
+    <th>Status</th>
+    <th>Primary Resource</th>
+    <th>Account</th>
+    {{#each tickets}}
+    <tr>
+        <td>{{this.ticket_num}}</td>
+        <td>{{this.title}}</td>
+        <td>{{this.priority}}</td>
+        <td>{{this.STATUS}}</td>
+        <td>{{this.primaryResource}}</td>
+        <td>{{this.account}}</td>
+    </tr>
+    {{/each}}
+</table>
+{{>toast}}

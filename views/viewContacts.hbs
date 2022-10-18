@@ -1,0 +1,54 @@
+{{>nav}}
+{{#if displayErr}}
+<div class="alert alert-danger" role="alert">{{displayErr}}</div>
+{{/if}}
+<h1 class="d-flex justify-content-center mt-2">Contacts</h1>
+<div class="mx-auto mt-4" style="width: 50%;">
+  {{#if contactIsNone}}
+  {{!-- <a href="/AssignPrimaryContact"></a> --}}
+  <a id="onHover" class="btn btn-primary" target="popup" 
+  {{#each dbo_contacts}}
+  onclick="window.open('/AssignPrimaryContact','popup','width=500,height=350'); return false;">
+  {{/each}}
+  Assign a contact</a>
+  {{/if}}
+  <table class="table bg-dark text-white" style="border-radius: 1em 1em 0 0">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">email</th>
+        <th scope="col">Primary Phone</th>
+        <th scope="col">CELL</th>
+        <th scope="col">Account</th>
+        {{#if isAdmin}}
+        <th scope="col">Actions</th>
+        {{/if}}
+      </tr>
+    </thead>
+    <tbody>
+      {{#if isAdmin}}
+      {{#each dbo_contacts}}
+      <tr>
+        <td>{{this.firstName}} {{this.lastName}}</td>
+        <td>{{this.email}}</td>
+        <td>{{this.primaryPhone}}</td>
+        <td>{{this.cellPhone}}</td>
+        <td>{{this.account}}</td>
+        <td><a href="/deleteContact{{this.contactID}}">Delete</a></td>
+      </tr>
+      {{/each}}
+      {{else}}
+      {{#each dbo_contacts}}
+      <tr>
+        <td>{{this.firstName}} {{this.lastName}}</td>
+        <td>{{this.email}}</td>
+        <td>{{this.primaryPhone}}</td>
+        <td>{{this.cellPhone}}</td>
+        <td>{{this.account}}</td>
+      </tr>
+      {{/each}}
+      {{/if}}
+    </tbody>
+  </table>
+</div>
+{{>toast}}

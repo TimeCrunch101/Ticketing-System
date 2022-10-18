@@ -1,0 +1,112 @@
+{{>nav}}
+{{#if message}}
+  <div class="alertWrapper">
+    <div class="alert alert-danger" role="alert">You do not have permission to view this. Contact your Administrator.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
+  </div>
+{{/if}}
+<h4>Hello {{userObject.firstName}} {{userObject.lastName}}</h4>
+
+<div id="dataDiv">
+  <div class="dataElement">
+    <canvas id="myChart" width="400px" height="400px"></canvas>
+  </div>
+  <div class="dataElement">
+    <canvas id="myChartPie" width="400" height="400"></canvas>
+  </div>
+</div>
+  <div class="dataElement">
+    <canvas id="myLineChart" width="400" height="400"></canvas>
+  </div>
+
+<script>
+
+const ctx = document.getElementById('myChart');
+const ctxPie = document.getElementById('myChartPie');
+
+// Data / Setup
+
+const data = {
+  labels: ['All Tickets', 'Open Tickets', 'Unassigned Tickets', 'Needs Attention'],
+  datasets: [{
+    label: 'Ticket Overview',
+    data: [{{totalTickets}}, {{OpenTickets}}, {{unassigned}}, {{needsAttention}}, 25],
+    backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(255, 159, 64, 0.2)',
+      'rgba(255, 205, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+    ],
+    borderColor: [
+      'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+      'rgb(255, 205, 86)',
+      'rgb(75, 192, 192)',
+    ],
+    borderWidth: 2
+  }]
+};
+
+const pieData = {
+  labels: [
+    'Total Tickets',
+    'Open Tickets',
+    'Unassigned Tickets',
+    'Needs Attention'
+  ],
+  datasets: [{
+    label: 'My First Dataset',
+    data: [{{totalTickets}}, {{OpenTickets}}, {{unassigned}}, {{needsAttention}}],
+    backgroundColor: [
+      '#403434',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)',
+      '#7B1212'
+    ],
+    hoverOffset: 4
+  }]
+};
+
+// CONFIG
+
+const config = {
+  type: 'bar',
+  data: data,
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true,
+      }
+    }
+  },
+};
+
+const pieConfig = {
+  type: 'pie',
+  data: pieData,
+};
+
+// Create Chart
+
+const myChart = new Chart(ctx, config);
+const myChartPie = new Chart(ctxPie, pieConfig);
+
+setTimeout(() => {
+    localReload()
+}, 30000)
+
+</script>
+
+<style>
+  #dataDiv {
+    display: flex;
+    justify-content: space-around;
+  }
+  .dataElement {
+    width: 600px;
+    height: 600px;
+  }
+  .dataElement:first-child {
+    background-color: rgb(89, 139, 180);
+  }
+</style>
+{{>toast}}

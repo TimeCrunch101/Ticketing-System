@@ -1,0 +1,284 @@
+<form action="/Add/Comment{{ticket_id}}" method="post">
+{{!-- BEGIN TITLE SECTION --}}    
+<h5 id="title">NEW TICKET TIME ENTRY</h5>
+{{!-- END TITLE SECTION --}}
+{{!-- BEGIN BUTTONS --}}
+<button id="createCommentBtn" class="form_btn" type="submit">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
+        <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+    </svg>
+    Save &#38; Close
+    </button> 
+<button class="form_btn">
+    save &#38; New
+    </button> 
+<button class="form_btn">
+    Save &#38; Notify
+    </button>
+{{!-- END BUTTONS --}}
+{{!-- BEGIN TICKET HEADER --}}
+<div class="ticket_header main_section">
+    <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
+            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1h-4z"/>
+        </svg>
+    </div>
+    <div>
+        <h6>T20220808.0135</h6>
+        <h6>Phillip - SSRS Setup (Thiel College)</h6>
+    </div>
+</div>
+{{!-- END TICKET HEADER --}}
+{{!-- BEGIN STATUS SECTION --}}
+<div class="status_section main_section">
+    <p class="section_title">TICKET STATUS</p>
+    <label for="status" class="form_label">Status</label>
+    <select class="dropdown_menu" name="status" id="status">
+        <option value="New">New</option>
+        <option value="Quick Ticket">Quick Ticket</option>
+        <option value="Assigned">Assigned</option>
+    </select>
+</div>
+{{!-- END STATUS SECTION --}}
+{{!-- BEGIN BILLING SECTION --}}
+<div class="billing_section main_section">
+    <p class="section_title">BILLING</p>
+    <div class="myWrapper">
+        <div class="input_group">
+            <div class="form_item">
+                <label for="role" class="form_label">Role</label>
+                <br>
+                <select class="dropdown_menu" name="role">
+                    <option value="End User" selected>End User</option>
+                    <option value="Network Consulting">Network Consulting</option>
+                </select>
+            </div>
+            <div class="form_item">
+                <label for="work_type" class="form_label">Work Type</label>
+                <br>
+                <select class="dropdown_menu" name="work_type">
+                    <option value="remote" selected>Remote</option>
+                    <option value="on-site">On-Site</option>
+                    <option value="consulting">Consulting</option>
+                </select>
+            </div>
+        </div>
+        <div class="input_group">
+            <div class="form_item">
+                <label for="contract" class="form_label">Contract</label>
+                <select class="dropdown_menu" name="contract">
+                    <option value="MFA" selected>Fully Managed Advanced | Co-Managed</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+{{!-- END BILLING SECTION --}}
+{{!-- BEGIN COMMENT DETAILS SECTION --}}
+<div class="comment_details">
+    <div class="date_bar">
+        <div class="date_item">
+            <p class="date_box">Friday</p>
+            <p class="date_box">09/02</p>
+        </div>
+        <div class="date_item">
+            <p class="date_box">Saturday</p>
+            <p class="date_box">09/03</p>
+        </div>
+        <div class="date_item">
+            <p class="date_box">Sunday</p>
+            <p class="date_box">09/04</p>
+        </div>
+        <div class="date_item">
+            <p class="date_box">Monday</p>
+            <p class="date_box">09/05</p>
+        </div>
+        <div class="date_item">
+            <p class="date_box">Tuesday</p>
+            <p class="date_box">09/06</p>
+        </div>
+        <div class="date_item">
+            <p class="date_box">Today</p>
+            <p class="date_box">09/07</p>
+        </div>
+    </div>
+    <div class="comment_form_details">
+        <div class="date_time">
+            <div class="comment_form_details_box">
+                <label for="date" class="form_label">Date</label>
+                <br>
+                <input type="date" name="date">
+            </div>
+            <div class="comment_form_details_box">
+                <label for="start_time" class="form_label">Start Time</label>
+                <br>
+                <input type="time" name="start_time">
+            </div>
+            <div class="div comment_form_details_box">
+                <label for="end_time" class="form_label">End Time</label>
+                <br>
+                <input type="time" name="end_time">
+            </div>
+        </div>
+        <div>
+            <div>
+                <label for="time_worked">Time Worked</label>
+            </div>
+            <div class="time_worked_div">
+                <input class="time_worked_input" type="number" name="time_worked_hours">h
+                <br>
+                <input class="time_worked_input" type="number" name="time_worked_minutes">m
+            </div>
+        </div>
+    </div>
+    {{!-- BEGIN SUMMARY NOTE SECTION --}}
+    <label for="comment_post_value" class="form_label">Summary Notes</label>
+    <div class="comment_input_area">
+        <div id="comment_description"></div>
+    </div>
+    <input style="display:none;" type="text" name="comment_post_value" id="comment_post_value" value="">
+    {{!-- END SUMMARY NOTE SECTION --}}
+</div>
+</form>
+{{!-- END COMMENT DETAILS SECTION --}}
+<script>
+var toolbarOptions = [
+  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+  ['blockquote', 'code-block'],
+
+  [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+  [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+  [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+  [{ 'direction': 'rtl' }],                         // text direction
+
+  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+  [{ 'font': [] }],
+  [{ 'align': [] }],
+
+  ['clean']                                         // remove formatting button
+];
+
+var quill = new Quill('#comment_description', {
+  modules: {
+    toolbar: toolbarOptions
+  },
+  theme: 'snow'
+});
+let btn = document.getElementById('createCommentBtn')
+btn.addEventListener("click", () => {
+    let text = document.getElementsByClassName('ql-editor')[0].innerHTML
+    document.getElementById('comment_post_value').value = text
+})
+</script>
+<style>
+:root {
+    --primary: #303E73;
+    --accent: #07123A;
+    --secondary: #7A85AD;
+}
+body {
+    background-color: var(--accent);
+}
+.ql-editor {
+    background-color: var(--secondary);
+    height: 300px;
+    color: black;
+}
+.ql-toolbar {
+    background-color: rgb(194, 193, 193);
+}
+.form_btn {
+    border: 1px solid var(--accent);
+    background-color: var(--secondary);
+    border-radius: .2em;
+}
+.comment_input_area {
+    margin: 1em;
+}
+.ticket_header {
+    display: flex;
+    flex-direction: row;
+
+}
+.title_section {
+    display: flex;
+    border: 1px solid var(--secondary);
+    align-items: center;
+}
+.main_section {
+    background-color: var(--primary);
+    width: 97%;
+    min-height: fit-content;
+    margin: 1.5em auto 1.5em auto;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    padding-left: 1em;
+    border-radius: .3em;
+    border: 1px solid var(--secondary);
+}
+.main_section:first-child {
+    margin-top: 3em;
+}
+.input_group {
+    height: 100%;
+    align-items: center;
+}
+.form_item {
+    margin-bottom: .5em;
+}
+.myWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.dropdown_menu {
+    width:200px;
+    background-color: rgb(97, 96, 96);
+    color: antiquewhite;
+}
+.date_bar {
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 3em;
+}
+.date_item {
+    border: 2px solid var(--secondary);
+    background-color: var(--primary);
+    border-radius: 1em;
+    width: 5em;
+    text-align: center;
+    margin-bottom: 2em;
+}
+.date_item:hover {
+    cursor: pointer;
+}
+.comment_form_details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 1em;
+}
+.date_time {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.time_worked_div {
+    display: flex;
+    flex-direction: row;
+    min-width: fit-content;
+    width: 150px;
+    justify-content: space-between;
+}
+.time_worked_input {
+    background-color: hsl(0, 1%, 38%);
+    width: 50px;
+}
+</style>

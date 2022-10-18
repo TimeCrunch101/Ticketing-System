@@ -1,0 +1,8 @@
+<div class="mfaContainer">
+<img style="margin-bottom:10px" id="padlock" src="imgs/padlock.png" alt="Padlock">
+<form action="/mfa/submit" method="post">
+    <input type="text" name="TOTP" id="TOTP" placeholder="TOTP Token" require>
+    <br>
+    <button onclick="loadSpinner()" class="btn btn-primary mfa_btn" type="submit">Submit</button>
+</form>
+</div>

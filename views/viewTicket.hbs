@@ -1,0 +1,306 @@
+<div id="ticket-window">
+{{!-- Begin Left Panel --}}
+{{#each ticket}}
+  <div id="left-info">
+    <div class="panelContent">
+      <div class="left-section">
+        <p class="dataTitle">Account</p>
+        <p class="data-value">{{this.account}}</p>
+        <p class="dataTitle">Contact</p>
+        {{#if this.primaryContact}}
+        <p class="data-value">{{this.primaryContact}}</p>
+        {{else}}
+        <p class="data-value text-danger">None Selected</p>
+        {{/if}}
+        <p class="dataTitle">Status</p>
+        <p class="data-value">{{this.STATUS}}</p>
+        <p class="dataTitle">Priority</p>
+        <p class="data-value">{{this.priority}}</p>
+      </div>
+      <div class="left-section">
+        <p class="dataTitle">Issue Type</p>
+        <p class="data-value">{{this.issue_type}}</p>
+        <p class="dataTitle">Sub-Issue Type</p>
+        <p class="data-value">{{this.sub_issue_type}}</p>
+        <p class="dataTitle">Source</p>
+        <p class="data-value">{{this.source}}</p>
+        <p class="dataTitle">Due Date</p>
+        <p class="data-value text-muted">09/06/2022 09:08 AM</p>
+        <p class="dataTitle">Estimated Hours</p>
+        <p class="data-value text-muted">1h</p>
+        <p class="dataTitle">SLA</p>
+        <p class="data-value text-muted">AtNetEdge Contract SLA</p>
+      </div>
+      <div class="left-section">
+        <p class="dataTitle">Queue</p>
+        <p class="data-value text-muted">Escalations</p>
+        <p class="dataTitle">Primary Resource</p>
+        <p class="data-value">{{this.primaryResource}}</p>
+        <p class="dataTitle">Secondary Resource</p>
+        {{#if this.secondaryResource}}
+        <p class="data-value">{{this.secondaryResource}}</p>
+        {{else}}
+        <p class="data-value text-muted">None Assigned</p>
+        {{/if}}
+      </div>
+      <div class="left-section">
+        <p class="dataTitle">Contract</p>
+        <p class="data-value text-muted">Phalanx Logistics Solutions AtNetEdge MSC</p>
+      </div>
+    </div>
+  </div>
+{{!-- End Left Panel --}}
+{{!-- Begin Middle Panel --}}
+  <div id="middle-info">
+  <div class="action-bar">
+      <div>
+          <a href="/editTicket{{ticket_id}}"><button class="action-btn">Edit</button></a>
+          <button class="action-btn" onclick="openPopupWindow('/viewTicket/Add/Comment/ticket{{this.ticket_id}}/#comment_description', 900, 700)">Add Comment</button>
+          <a href="/user/accept/ticket{{ticket_id}}"><button class="action-btn">Accept</button></a>
+          <a href="/user/mark/ticket/complete{{ticket_id}}"><button class="action-btn">Complete</button></a>
+      </div>
+  </div>
+    <div class="panelContent">
+      <div class="middle-section-title">
+        <h6 style="margin: 1em 0 1em .5em;">{{this.ticket_num}}</h6>
+        <h4>{{this.title}}</h4>
+        <p>Created {{this.dateCreated}} - {{this.source}}</p>
+      </div>
+      <div class="middle-section">
+        <h6 id="ticket-description-title">DESCRIPTION</h6>
+        <div id="description-window"></div>
+      </div>
+        <div class="mini-nav">
+          <ul class="mini-nav-list">
+            <li class="mini-nav-item">Activity</li>
+            <li class="mini-nav-item">Attachments</li>
+            <li class="mini-nav-item">Charges Expenses</li>
+            <li class="mini-nav-item">Service Calls</li>
+            <li class="mini-nav-item">Changes</li>
+          </ul>
+        </div>
+{{/each}}
+{{#each comments}}
+        <div id="commentID_{{commentID}}" class="comment-section">
+          <p class="dataTitle">Aaron Allen</p>
+          <p class="dataTitle">{{date}} (0.2500 hours)</p>
+          <p id="comment_data_{{commentID}}" class="data-value"></p>
+          <div class="comment-options">
+            <ul class="comment-options-list">
+              <li class="comment-options-list-link">note</li>
+              <li class="comment-options-list-link">time</li>
+              <li class="comment-options-list-link" onclick="openPopupWindow('/addAttachment{{commentID}}', 500, 500)">attachment</li>
+              <li class="comment-options-list-link" onclick="openPopupWindow('/viewTicket/Edit/CommentID{{commentID}}', 900, 700)">edit</li>
+              <li class="comment-options-list-link" onclick="deleteComment({{commentID}})">delete</li>
+            </ul>
+          </div>
+        </div>
+{{/each}}        
+    </div>
+  </div>
+{{!-- End Middle Panel --}}
+{{!-- Begin Right Panel --}}
+{{#each ticketClient}}
+<div id="right-info">
+  <div class="right-section">
+    <h6>TIME SUMMARY</h6>
+  </div>
+  <div class="right-section">
+    <h6>ACCOUNT/CONTACT</h6>
+    <p class="dataTitle">{{this.name}}</p>
+    <br>
+    <p class="dataTitle">Account Manager</p>
+    <p class="data-value">Aaron Allen</p>
+    <br>
+    {{#if this.city}}
+    <p class="data-value">{{this.street}}</p>
+    <p class="data-value">{{this.city}}, {{this.state}} {{this.zip}}</p>
+    <p class="data-value">United States</p>
+    {{/if}}
+    <br>
+    <p class="data-value">{{this.phone}}</p>
+    <hr>
+    {{#if this.poc}}
+    <p class="dataTitle">{{this.poc}}</p>
+    <p class="data-value">President</p>
+    <br>
+    <p class="data-value">12166501164</p>
+    <p class="data-value">216-650-1164 (moblie)</p>
+    <p class="data-value">mmd@phalanxlogistics.com</p>
+    {{else}}
+    <p class="dataTitle text-danger">No POC Assigned</p>
+    {{/if}}
+    <br>
+  </div>
+</div>
+{{/each}}
+{{!-- End Right Panel --}}
+
+
+
+
+</div>
+<style>
+  :root {
+    --minWidth: 20%;
+    --bold: 700;
+  }
+.action-bar {
+  width: 100%;
+  height: 3.5em;
+  display: flex;
+  gap: 2em;
+  flex-direction: row;
+  align-items: center;
+}
+.action-btn {
+  background-color: hsl(219, 54%, 11%);
+  color: hsl(189, 100%, 50%);
+  border-radius: .5rem;
+  font-weight: 500;
+  padding: .3em;
+}
+.action-btn:hover {
+  background-color: hsl(220, 41%, 19%);
+}
+.mini-nav {
+  margin-top: 1em;
+}
+#ticket-description-title {
+  margin: 0 0 2em .5em;
+}
+.mini-nav {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  background-color: hsl(234, 88%, 13%);
+}
+.mini-nav-list {
+  display: flex; 
+  padding-left: 0;
+  flex-direction: row;
+  justify-content: space-around;
+  list-style: none;
+  font-weight: var(--bold);
+}
+.mini-nav-item:hover {
+  cursor: pointer;
+}
+
+#ticket-window {
+  min-width: 1130px;
+  display: flex;
+  flex-direction: row;
+}
+#ticket-window,p {
+  margin-bottom: 0;
+}
+#left-info {
+  min-width: 250px;
+  max-width: 250px;
+  display: block;
+  height: fit-content;
+  background-color: hsl(278, 71%, 11%);
+}
+#middle-info {
+  width: 100%;
+}
+#right-info {
+  width: var(--minWidth); 
+  min-width: fit-content;
+  max-width: fit-content;
+  display: block;
+  height: fit-content;
+  background-color: hsl(278, 71%, 11%);
+}
+.dataTitle {
+  font-weight: var(--bold);
+}
+.data-value {
+ margin-left: 1em;
+}
+.left-section {
+  padding-left: 1em;
+  min-width: fit-content;
+  border-top: 3px solid rgb(32, 32, 54);
+  background-color: hsl(231, 59%, 11%);
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin-bottom: 2em;
+}
+.right-section {
+  min-width: fit-content;
+  padding-left: 1em;
+  border-top: 3px solid rgb(32, 32, 54);
+  background-color: hsl(231, 59%, 11%);
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin-bottom: 2em;
+  padding-right: 1em;
+}
+.middle-section-title {
+  padding-bottom: 1em;
+  border-bottom: 2px solid lightblue;
+  margin-bottom: 1em;
+}
+.middle-section {
+  
+  max-height: fit-content;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+.comment-section {
+  border: 1px solid rgb(41, 61, 70);
+  border-radius: 1em;
+  padding: 1em;
+  max-height: fit-content;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+#description-window {
+  padding: .5em 1em 1em 1em;
+}
+.comment-options {
+  margin-top: .5em;
+  width: max-content;
+}
+.comment-options-list {
+  padding-left: 0;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  gap: 1em;
+  color: hsl(189, 100%, 50%);
+  
+}
+.comment-options-list-link:hover {
+  cursor: pointer;
+}
+</style>
+<a href=""></a>
+{{#each ticket}}
+<script>
+fetch('/fetch/viewTicket{{this.ticket_id}}').then((response) => response.json()).then((data) => {
+  document.getElementById('description-window').innerHTML = `${data[0].description}`
+  fetch('/fetch/viewComments{{this.ticket_id}}').then((response) => response.json().then((data) => {
+    let commentData = data
+    commentData.forEach(function(commentOBJ) {
+      if (commentOBJ.attachment === null) {
+        document.getElementById(`comment_data_${commentOBJ.commentID}`).innerHTML = `${commentOBJ.comment}`
+      } else {
+        document.getElementById(`comment_data_${commentOBJ.commentID}`).innerHTML = `${commentOBJ.comment}` + `<a href="${commentOBJ.attachment}" download='Attachment'>Download Attachment</a>`
+      }
+    })
+    }))
+})
+</script>
+{{/each}}
+<script>
+function deleteComment(commentID) {
+  document.getElementById(`commentID_${commentID}`).style.display = 'none';
+  fetch(`/delete/comment${commentID}`).then(async (status) => {
+    console.log(status)
+  }).catch((err) => {
+    console.log(err)
+  })
+}
+</script>

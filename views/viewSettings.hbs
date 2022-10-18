@@ -1,0 +1,82 @@
+{{>nav}}
+
+<div class="createForm">
+    {{#if msg}}
+    <div class="alert alert-success" role="alert">
+        {{msg}}
+    </div>
+    {{/if}}
+    {{#if errMsg}}
+    <div class="alert alert-danger" role="alert">
+        {{errMsg}}
+    </div>
+    {{/if}}
+        <h3>SMTP Settings</h3>
+        <form action="/settings/update/smtp" method="post">
+            <label for="host">SMTP Address</label>
+            <input type="text" name="host" id="host" value="{{host}}">
+
+            <label for="port">SMTP Port Number</label>
+            <input type="text" name="port" id="port" value="{{port}}">
+
+            <label for="user">Authentication Email</label>
+            <input type="text" name="user" id="user" value="{{user}}">
+
+            <label for="pass">Password</label>
+            <input type="password" name="pass" id="pass" value="{{pass}}">
+
+            <label for="secure">Secure Connection: </label>
+            {{#if secure}}
+            <input type="radio" id="secure" name="secure" value="1" checked>
+            <label for="secure">Yes</label>
+            <input type="radio" id="secure" name="secure" value="0">
+            <label for="secure">No</label>
+            {{else}}
+            <input type="radio" id="secure" name="secure" value="1">
+            <label for="secure">Yes</label>
+            <input type="radio" id="secure" name="secure" value="0" checked>
+            <label for="secure">No</label>
+            {{/if}}
+
+            <label for="require_tls">Require TLS: </label>
+            {{#if require_tls}}
+            <input type="radio" id="require_tls" name="require_tls" value="1" checked>
+            <label for="require_tls">Yes</label>
+            <input type="radio" id="require_tls" name="require_tls" value="0">
+            <label for="require_tls">No</label>
+            {{else}}
+            <input type="radio" id="require_tls" name="require_tls" value="1">
+            <label for="require_tls">Yes</label>
+            <input type="radio" id="require_tls" name="require_tls" value="0" checked>
+            <label for="require_tls">No</label>
+            {{/if}}
+
+            <button type="submit" class="btn btn-primary" style="margin-top: 5px;">Save</button>
+        </form>
+        <a href="/sendTestEmail"><button class="btn btn-primary">Send Test Email</button></a>
+        {{!-- <button id="test_email_btn" onclick="sendTestEmail()" class="btn btn-primary" style="margin-top: 5px;">Send Test Email</button> --}}
+        <a href="/deleteSMTPinfo"><button class="btn btn-danger">Delete SMTP Settings</button></a>
+        <div id="TestEmailStatus"></div>   
+</div>
+
+
+<div class="createForm">
+    <h3>Twilio API Integration</h3>
+    <form action="/update/twilioAPI" method="post">
+
+    <label for="account_sid">Account SID:</label>
+    <input type="text" name="account_sid" id="account_sid" value="{{account_sid}}" required>
+
+    <label for="auth_token">API Key:</label>
+    <input type="password" name="auth_token" id="auth_token" value="{{auth_token}}" required>
+
+    <label for="msg_service_sid">Messenger Service SID:</label>
+    <input type="text" name="msg_service_sid" id="msg_service_sid" value="{{msg_service_sid}}" required>   
+
+    <button class="btn btn-primary" type="submit">Save</button>
+    </form>
+
+    <button id="test_twilio" onclick="sendTestTxtMSG()" class="btn btn-primary">Send a test TXT MSG</button>
+    <div id="TestTXTMSGStatus"></div>   
+</div>
+{{>toast}}

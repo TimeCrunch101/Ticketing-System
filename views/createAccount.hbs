@@ -1,0 +1,35 @@
+<div class="createForm">
+    <h3>Create Account</h3>
+    <form action="/Account/Create" method="POST">
+
+        <label for="accountName">Company Name</label>
+        <input type="text" name="accountName" id="accountName" required>
+
+        {{!-- <p>Address</p> --}}
+        <label for="street">Primary Address</label>
+        <input type="text" name="street" placeholder="Street Address">
+
+        {{!-- <label for="city">City</label> --}}
+        <input type="text" name="city" id="city" placeholder="City">
+
+        {{!-- <label for="state">State</label> --}}
+        <input type="text" name="state" id="state" placeholder="State">
+
+        {{!-- <label for="zip">zip</label> --}}
+        <input type="text" name="zip" id="zip" placeholder="Zip Code">
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" name="phone" id="phone">
+        
+        <label for="fax">Fax Number</label>
+        <input type="tel" name="fax" id="fax">
+
+        <label for="service_plan">Service Plan</label>
+        <input type="text" name="service_plan" id="service_plan">
+
+        <label for="current_contract">Current Contract</label>
+        <input type="text" name="current_contract" id="current_contract">
+
+        <button type="submit" class="btn btn-primary" style="margin-top: 5px;">Create</button>
+    </form>
+</div>

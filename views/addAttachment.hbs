@@ -1,0 +1,21 @@
+<div class="formContainer">
+{{#each data}}
+<form action="/addAttachment{{this.commentID}}" method="post" enctype="multipart/form-data">
+<label for="file">Upload 1 attachment</label>
+<br>
+<br>
+<input type="file" name="file" id="file">
+<br>
+<br>
+<button type="submit">Upload</button>
+</form>
+{{/each}}
+</div>
+
+<style>
+    .formContainer {
+        border: 1px solid red;
+        width: max-content;
+        margin: 3em auto;
+    }
+</style>

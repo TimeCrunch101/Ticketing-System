@@ -1,0 +1,164 @@
+body {
+    background-color: hsl(215, 49%, 16%);
+    color: hsl(0, 0%, 86%);
+    overflow: auto;
+}
+:root {
+    --myColor1: #2fe3ff;
+    --myColor2: #2fe3ff;
+    --myColor3: #2fe3ff;
+    --myColor4: #2fe3ff;
+    --myColor5: #2fe3ff;
+    --danger: #ff00ff;
+  }
+.fix-style {
+    margin-top: 1.3em;
+    padding: 0px;
+}
+#onHover:hover {
+    cursor: pointer;
+}
+.c-ticket-border {
+    border: 2px solid blue;
+    border-radius: 1em;
+    padding: 2em;
+}
+.comment-border {
+    border: 2px solid hsl(172, 71%, 31%);
+    border-radius: 1em;
+    padding: 2em;
+
+    text-align: center;
+}
+/* GAUGE */
+.gauge-container {
+    width: 300px;
+    height: 300px;
+    min-width: 300px;
+    min-height: 300px;
+    border: 2px solid lightblue;
+    border-radius: 1em;
+    cursor: pointer; 
+  }
+  .gauge-container > .gauge > .dial {
+    stroke: #334455;
+    stroke-width: 8;
+  }
+  /* Change this to change the color of the gauge */
+  .gauge-container > .gauge > .value1 {
+    stroke: var(--myColor1);
+    stroke-width: 8;
+  }
+  .gauge-container > .gauge > .value2 {
+    stroke: var(--myColor2);
+    stroke-width: 8;
+  }
+  .gauge-container > .gauge > .value3 {
+    stroke: var(--myColor3);
+    stroke-width: 8;
+  }
+  .gauge-container > .gauge > .value4 {
+    stroke: var(--danger);
+    stroke-width: 8;
+  }
+  .gauge-container > .gauge > .value5 {
+    stroke: var(--myColor5);
+    stroke-width: 8;
+  }
+  .gauge-container > .gauge > .value-text {
+    fill: var(--myColor);
+    font-family: sans, 'sans-serif';
+    font-weight: bold;
+    font-size: 0.6em;
+  }
+  .gauge-text {
+    padding-left: 5px;
+    font-weight: bold;
+  }
+  .weather-data {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  .weather-data,h3 {
+    align-items: center;
+  }
+.myContain-home {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 9em;
+    display: flex;
+    gap: 2em;
+    flex-direction: column;
+  }
+  .myContain-home-wrapper {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 2em;
+    margin-bottom: 3em;
+  }
+.spinner-wrapper {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 0px);
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.466);
+  position:fixed
+  
+}
+.b-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+#ticketDescription {
+  width: 100%;
+  height: 40vh;
+  background-color: rgb(134, 138, 150);
+  border-radius: 1em;
+  resize: both;
+  overflow: auto;
+  
+}
+#padlock {
+  width: 200px;
+  height: 200px;
+}
+.mfaContainer {
+  border: 7px solid rgb(61, 59, 59);
+  border-radius: 2em;
+  padding: 1em;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 10em auto;
+  align-items: center;
+
+}
+#email {
+  display: none;
+  margin-top: 10px;
+}
+.mfa_btn {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.createForm {
+  padding: 2em;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  /* margin: 1em auto auto 2em; */
+  align-items: center;
+}
+
+/* .alertWrapper {
+  margin: 0 auto 0 auto;
+  width: 30%;
+} */

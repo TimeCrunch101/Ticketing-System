@@ -1,0 +1,301 @@
+<form action="/updateTicket{{ticket_with_ids.ticket_id}}" method="post">
+<div id="ticket-window">
+{{!-- Begin Left Panel --}}
+  <div id="left-info">
+    <div class="panelContent">
+      <div class="left-section">
+        <label for="ticketAccount" class="dataTitle">Account</label>
+        <select name="ticketAccount" class="data-value dropdown">
+          <option value="{{ticket_with_ids.account}}" hidden selected>{{ticket_normalized.account}}</option>
+          {{#each allAccounts}}
+          <option value="{{this.account_id}}">{{this.name}}</option>
+          {{/each}}
+        </select>
+        <label class="dataTitle" for="ticketContact">Contact</label>
+        <select class="dropdown data-value" name="ticketContact">
+          <option value="{{primaryContact.contactID}}" selected hidden>{{primaryContact.firstName}} {{primaryContact.lastName}}</option>
+          {{#each allContacts}}
+            <option value="{{this.contactID}}">{{this.firstName}} {{this.lastName}}</option>
+          {{/each}}
+        </select>
+        <label class="dataTitle" for="ticketStatus">Status</label>
+        <select name="status"class="data-value dropdown">
+            <option value="{{currentStatus.statusID}}" selected hidden>{{currentStatus.statusTitle}}</option>
+            {{#each allStatus}}
+            <option value="{{this.statusID}}">{{this.statusTitle}}</option>
+            {{/each}}
+        </select>
+        <label class="dataTitle" for="ticketPriority">Priority</label>
+        <select class="data-value dropdown" name="ticketPriority">
+                <option value="{{ticket_normalized.priority}}" selected hidden>{{ticket_normalized.priority}}</option>                
+                <option style='color:green;' value="LOW">LOW</option>
+                <option style='color:blue;' value="MEDIUM">MEDIUM</option>
+                <option style='color:orange;' value="HIGH">HIGH</option>
+                <option style='color:red;' value="CRITICAL">CRITICAL</option>
+        </select>
+      </div>
+      <div class="left-section">
+        <label for="issueType" class="dataTitle">Issue Type</label>
+        <select name="issueType" id="issue_type" class="data-value dropdown">
+          <option value="{{ticket_with_ids.issue_type}}" selected hidden>{{ticket_normalized.issue_type}}</option>
+          {{#each allIssueTypes}}
+          <option value="{{this.row_id}}">{{this.issue_name}}</option>
+          {{/each}}
+        </select>
+        <label for="subIssueType" class="dataTitle">Sub-Issue Type</label>
+        <select name="subIssueType" id="subIssueType" class="data-value dropdown">
+          <option value="{{ticket_with_ids.sub_issue_type}}" selected hidden>{{ticket_normalized.sub_issue_type}}</option>
+          {{#each allSubIssueTypes}}
+          <option value="{{this.row_id}}">{{this.sub_issue_name}}</option>
+          {{/each}}
+        </select>
+        <p class="dataTitle">Source</p>
+        <p class="data-value">{{ticket_normalized.source}}</p>
+        <p class="dataTitle">Due Date</p>
+        <p class="data-value text-muted">09/06/2022 09:08 AM</p>
+        <p class="dataTitle">Estimated Hours</p>
+        <p class="data-value text-muted">1h</p>
+        <p class="dataTitle">SLA</p>
+        <p class="data-value text-muted">AtNetEdge Contract SLA</p>
+      </div>
+      <div class="left-section">
+        <p class="dataTitle">Queue</p>
+        <p class="data-value text-muted">Escalations</p>
+        <label for="primaryResource" class="dataTitle">Primary Resource</label>
+        <select name="primaryResource" id="primaryResource" class="data-value dropdown">
+          <option value="{{ticket_with_ids.primaryResource}}" selected hidden>{{ticket_normalized.primaryResource}}</option>
+          {{#each allResources}}
+          <option value="{{this.resource_id}}">{{this.firstName}} {{this.lastName}}</option>
+          {{/each}}
+        </select>
+        <label for="secondaryResource" class="dataTitle">Secondary Resource</label>
+        <select name="secondaryResource" id="secondaryResource" class="data-value dropdown">
+          <option value="{{ticket_with_ids.secondaryResource}}" selected hidden>{{ticket_normalized.secondaryResource}}</option>
+          {{#each allResources}}
+          <option value="{{this.resource_id}}">{{this.firstName}} {{this.lastName}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="left-section">
+        <p class="dataTitle">Contract</p>
+        <p class="data-value text-muted">{{ticket_normalized.account}} AtNetEdge MSC</p>
+      </div>
+    </div>
+  </div>
+{{!-- End Left Panel --}}
+{{!-- Begin Middle Panel --}}
+  <div id="middle-info">
+  <div class="action-bar">
+      <div>
+          <a href="/viewTicket{{ticket_with_ids.ticket_id}}"><button type="button" class="action-btn text-muted">Cancel</button></a>
+          <button type="submit" class="action-btn text-success" id="updateTicketBtn">Save</button>
+      </div>
+  </div>
+    <div class="panelContent">
+      <div class="middle-section-title">
+        <h6 style="margin: 1em 0 1em .5em;">{{ticket_with_ids.ticket_num}}</h6>
+        <label class="dataTitle" for="ticketTitle">Title</label>
+        <br>
+        <input class="data-value" type="text" name="ticketTitle" value="{{ticket_with_ids.title}}">
+        <p>Created {{ticket_with_ids.dateCreated}} - {{ticket_normalized.source}}</p>
+      </div>
+      <div class="middle-section">
+        <h6 id="ticket-description-title">DESCRIPTION</h6>
+        <div id="ticket_Description_div"></div>
+        <input type="text" name="ticketDescription" id="ticket_description_input" hidden>
+      </div>
+    </div>
+  </div>
+{{!-- End Middle Panel --}}
+{{!-- Begin Right Panel --}}
+  <div id="right-info">
+    <div class="right-section">
+      <h6>TIME SUMMARY</h6>
+    </div>
+    <div class="right-section">
+      <h6>ACCOUNT/CONTACT</h6>
+      <p class="dataTitle">{{ticket_normalized.account}}</p>
+      <br>
+      <p class="dataTitle">Account Manager</p>
+      <p class="data-value text-muted">Aaron Allen</p>
+      <br>
+      <p class="data-value">{{ticketAccount.street}}</p>
+      <p class="data-value">{{ticketAccount.city}}, {{ticketAccount.state}} {{ticketAccount.zip}}</p>
+      <p class="data-value">United States</p>
+      <br>
+      <p class="data-value">{{ticketAccount.phone}}</p>
+      <hr>
+      <p class="dataTitle">{{ticketAccount.poc}}</p>
+      <p class="data-value text-muted">President</p>
+      <br>
+      <p class="data-value">{{ticketAccount.phone}}</p>
+      <p class="data-value text-muted">216-650-1164 (moblie)</p>
+      <p class="data-value text-muted">mmd@phalanxlogistics.com</p>      
+      <br>
+    </div>
+  </div>
+
+</div>
+{{!-- End Right Panel --}}
+</form>
+<style>
+:root {
+  --minWidth: 20%;
+  --bold: 700;
+  --primary: #303E73;
+  --accent: #07123A;
+  --secondary: #7A85AD;
+}
+html {
+  height: 100%;
+}
+.ql-editor {
+  background-color: var(--secondary);
+  height: 300px;
+  color: black;
+}
+.ql-toolbar {
+  background-color: rgb(194, 193, 193);
+}
+
+.action-bar {
+width: 100%;
+height: 3.5em;
+display: flex;
+gap: 2em;
+flex-direction: row;
+align-items: center;
+}
+.action-btn {
+background-color: hsl(219, 54%, 11%);
+color: hsl(189, 100%, 50%);
+border-radius: .5rem;
+font-weight: 500;
+padding: .3em;
+}
+.action-btn:hover {
+background-color: hsl(220, 41%, 19%);
+}
+#ticket-description-title {
+margin: 0 0 2em .5em;
+}
+#ticket-window {
+min-width: 1130px;
+height: fit-content;
+display: flex;
+flex-direction: row;
+}
+#ticket-window,p {
+margin-bottom: 0;
+}
+#left-info {
+min-width: 250px;
+max-width: 250px;
+display: block;
+height: fit-content;
+background-color: hsl(278, 71%, 11%);
+}
+#middle-info {
+width: 100%;
+}
+#right-info {
+width: var(--minWidth); 
+min-width: fit-content;
+max-width: fit-content;
+display: block;
+height: fit-content;
+background-color: hsl(278, 71%, 11%);
+}
+.dataTitle {
+font-weight: var(--bold);
+}
+.data-value {
+margin-left: 1em;
+width: calc(100% - 3em);
+}
+.left-section {
+padding-left: 1em;
+min-width: fit-content;
+border-top: 3px solid rgb(32, 32, 54);
+background-color: hsl(231, 59%, 11%);
+padding-top: 1em;
+padding-bottom: 1em;
+margin-bottom: 2em;
+}
+.right-section {
+min-width: fit-content;
+padding-left: 1em;
+border-top: 3px solid rgb(32, 32, 54);
+background-color: hsl(231, 59%, 11%);
+padding-top: 1em;
+padding-bottom: 1em;
+margin-bottom: 2em;
+padding-right: 1em;
+}
+.middle-section-title {
+padding-bottom: 1em;
+border-bottom: 2px solid lightblue;
+margin-bottom: 1em;
+}
+.middle-section {
+max-height: fit-content;
+margin-top: 1.5em;
+margin-bottom: 1.5em;
+}
+.dropdown {
+  background-color: hsl(0, 1%, 38%);
+}
+</style>
+<script>
+var toolbarOptions = [
+  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+  ['blockquote', 'code-block'],
+
+  [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+  [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+  [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+  [{ 'direction': 'rtl' }],                         // text direction
+
+  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+  [{ 'font': [] }],
+  [{ 'align': [] }],
+
+  ['clean']                                         // remove formatting button
+];
+
+var quill = new Quill('#ticket_Description_div', {
+  modules: {
+    toolbar: toolbarOptions
+  },
+  theme: 'snow'
+});
+fetch('/fetch/viewTicket{{ticket_normalized.ticket_id}}').then((response) => response.json()).then((data) => {
+const delta = quill.clipboard.convert(data[0].description)
+quill.setContents(delta, 'silent')
+})
+let btn = document.getElementById('updateTicketBtn')
+btn.addEventListener("click", () => {
+    let text = document.getElementsByClassName('ql-editor')[0].innerHTML
+    document.getElementById('ticket_description_input').value = text
+
+}) 
+const selectElement = document.querySelector('#issue_type');
+selectElement.addEventListener('change', (event) => {
+  const result = document.querySelector('.result');
+  let issueSelected = event.target.value
+  fetch(`/fetch/sub_issue_type${issueSelected}`).then((response) => response.json()).then((data) => {
+    var select = document.getElementById("subIssueType");
+    select.options.length = 0;
+    var select = document.getElementById("subIssueType");
+    for(index in data) {
+        select.options[select.options.length] = new Option(data[index].sub_issue_name, data[index].row_id);
+    }
+  }).catch((err) => {
+  console.log(err)
+  })
+});
+</script>

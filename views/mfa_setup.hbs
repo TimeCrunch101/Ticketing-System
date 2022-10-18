@@ -1,0 +1,18 @@
+<div class="mfaContainer">
+    <img style="margin-bottom:10px;border-radius:1em;" id="padlock" src="{{QRcode}}" alt="QR Code">
+    <form action="/mfa/token/submit" method="post">
+        <p style="text-align: center;">Scan the QR Code with your favirote Two Factor App, Like Google Authenticator. Then enter the 6-digit code below</p>
+        <input type="text" id="TOTP" name="TOTP" placeholder="6-digit code" required>
+        <input type="email" id="email" name="email" value="{{email}}">
+        <br>
+        <button class="btn btn-primary mfa_btn" type="submit">Submit</button>
+    </form>
+    <div>
+        <p>Secret: {{skey}}</p>
+    </div>
+</div>
+<style>
+#TOTP{
+    width: 100%;
+}
+</style>

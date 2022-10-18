@@ -1,0 +1,23 @@
+<div class="createForm">
+<h3>Create Contact</h3>
+    <form action="/Create/New/Contact" method="post" class="m-3">
+        <label class="me-2" for="firstName">First Name</label>
+        <input type="text" name="firstName" id="firstName" required>
+        <label class="me-2" for="lastName">Last Name</label>
+        <input type="text" name="lastName" id="lastName">
+        <label class="me-2" for="email">Email</label>
+        <input type="email" name="email">
+        <label class="me-2" for="primaryPhone">Primary Phone</label>
+        <input type="tel" id="primaryPhone" name="primaryPhone" pattern="[0-9]{10}">
+        <label class="me-2" for="cellPhone">Cell Phone</label>
+        <input type="tel" id="cellPhone" name="cellPhone" pattern="[0-9]{10}">
+        <label class="me-2" for="account">Account</label>
+        <select name="account" id="account">
+            <option value="1" selected>None</option>
+            {{#each dbo_clients}}
+            <option value="{{this.account_id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+    <button type="submit" class="btn btn-primary" style="margin-top: 5px;">Submit</button>
+    </form>
+</div>

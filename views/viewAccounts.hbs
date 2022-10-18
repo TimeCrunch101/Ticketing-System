@@ -1,0 +1,43 @@
+{{>nav}}
+<h1 class="d-flex justify-content-center mt-2">Accounts</h1>
+<div class="mx-auto mt-4" style="width: 50%;">
+  <table class="table bg-dark text-white" style="border-radius: 1em 1em 0 0">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Primary Phone</th>
+        <th scope="col">Service Plan</th>
+        <th scope="col">Current Contract</th>
+        {{#if isAdmin}}
+        <th scope="col">Actions</th>
+        {{/if}}
+      </tr>
+    </thead>
+    <tbody>
+      {{#if isAdmin}}
+      {{#each dbo_clients}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{street}} {{city}} {{state}}, {{zip}}</td>
+        <td>{{phone}}</td>
+        <td>{{service_plan}}</td>
+        <td>{{current_contract}}</td>
+        <td><a href="/deleteAccount{{account_id}}">Delete</a></td>
+      </tr>
+      {{/each}}
+      {{else}}
+      {{#each dbo_clients}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{street}} {{city}} {{state}}, {{zip}}</td>
+        <td>{{phone}}</td>
+        <td>{{service_plan}}</td>
+        <td>{{current_contract}}</td>
+      </tr>
+      {{/each}}
+      {{/if}}
+    </tbody>
+  </table>
+</div>
+{{>toast}}
